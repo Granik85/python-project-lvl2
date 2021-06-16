@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hexlet-code"
-version = "0.1.0"
+version = "0.1.5"
 description = ""
 authors = ["Artem Ivanov <wertart@gmail.com>"]
 
@@ -14,5 +14,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-gendiff = "gendiff:main"
-
+gendiff = "hexlet_code.gendiff:main"
