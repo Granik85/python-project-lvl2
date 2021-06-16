@@ -33,5 +33,6 @@ def generate_diff(file_path1, file_path2):
     str_result += '}'
     return str_result
 
+
 if __name__ == '__main__':
     main()
