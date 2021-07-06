@@ -1,4 +1,5 @@
 import json
+import yaml
 
 
 def generate_diff(file_path1, file_path2):
@@ -28,14 +29,24 @@ def generate_diff(file_path1, file_path2):
         str_result += '}'
         return str_result
     elif type_comparison == 'yaml':
-        pass #yaml loader and handler will be here
+        pass
 
 
+def json_load(file_path):
+    pass
 
 
+def yaml_load(file_path):
+    pass
 
 
-def check_file_type(file_path:str):
+def dump_result(item, file_type='yaml'):
+    if file_type == 'json':
+        return json.dumps(item)
+    return yaml.dump(item)
+
+
+def check_file_type(file_path: str):
     if file_path.endswith('json'):
         return 'json'
     if file_path.endswith('yaml') or file_path.endswith('yml'):
