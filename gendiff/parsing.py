@@ -3,41 +3,37 @@ import yaml
 
 
 def generate_diff(file_path1, file_path2):
-    type_comparison = check_file_type(file_path1)
-    if type_comparison == 'json':
-        str_result = '{\n'
-        json_minus = json.load(open(file_path1))
-        json_plus = json.load(open(file_path2))
-        print(type(json_minus))
-        keys = set(json_plus)
-        keys.update(set(json_minus))
-        for item in sorted(keys):
-            if json_minus.get(item) is None:
-                str_result += '  + ' + item + \
-                              ': ' + json.dumps(json_plus.get(item)) + '\n'
-            elif json_plus.get(item) is None:
-                str_result += '  - ' + item + \
-                              ': ' + json.dumps(json_minus.get(item)) + '\n'
-            elif json_minus.get(item) != json_plus.get(item):
-                str_result += '  - ' + item + \
-                              ': ' + json.dumps(json_minus.get(item)) + '\n'
-                str_result += '  + ' + item + \
-                              ': ' + json.dumps(json_plus.get(item)) + '\n'
-            else:
-                str_result += '    ' + item + \
-                              ': ' + json.dumps(json_plus.get(item)) + '\n'
-        str_result += '}'
-        return str_result
-    elif type_comparison == 'yaml':
-        pass
+    file_type = check_file_type(file_path1)
+
+    str_result = '{\n'
+    json_minus = file_load(open(file_path1), file_type)
+    json_plus = file_load(open(file_path2), file_type)
+    print(type(json_minus))
+    keys = set(json_plus)
+    keys.update(set(json_minus))
+    for item in sorted(keys):
+        if json_minus.get(item) is None:
+            str_result += '  + ' + item + \
+                          ': ' + dump_result(json_plus.get(item), file_type) + '\n'
+        elif json_plus.get(item) is None:
+            str_result += '  - ' + item + \
+                          ': ' + dump_result(json_minus.get(item), file_type) + '\n'
+        elif json_minus.get(item) != json_plus.get(item):
+            str_result += '  - ' + item + \
+                          ': ' + dump_result(json_minus.get(item), file_type) + '\n'
+            str_result += '  + ' + item + \
+                          ': ' + dump_result(json_plus.get(item), file_type) + '\n'
+        else:
+            str_result += '    ' + item + \
+                          ': ' + dump_result(json_plus.get(item), file_type) + '\n'
+    str_result += '}'
+    return str_result
 
 
-def json_load(file_path):
-    pass
-
-
-def yaml_load(file_path):
-    pass
+def file_load(file_path, file_type):
+    if file_type == 'json':
+        return json.load(file_path)
+    return yaml.full_load(file_path)
 
 
 def dump_result(item, file_type='yaml'):
