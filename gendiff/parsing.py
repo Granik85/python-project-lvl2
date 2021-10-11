@@ -36,7 +36,7 @@ def generate_diff(file_path1, file_path2):
 
     dict_minus = file_load(open(file_path1), file_type)
     dict_plus = file_load(open(file_path2), file_type)
-    print(diff(dict_plus, dict_minus))
+    return diff(dict_plus, dict_minus)
 
 
 def diff(dict1, dict2):
