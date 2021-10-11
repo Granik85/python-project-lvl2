@@ -10,7 +10,7 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
 
     dict_minus = file_load(open(file_path1), file_type)
     dict_plus = file_load(open(file_path2), file_type)
-    list_diff = diff(dict_plus, dict_minus)
+    list_diff = diff(dict_minus, dict_plus)
     return format_diff(list_diff, format_name)
 
 
