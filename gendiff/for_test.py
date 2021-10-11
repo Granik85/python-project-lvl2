@@ -1,5 +1,5 @@
 from parsing import generate_diff2, generate_diff
-from stylish import stylish
+from gendiff.formatters.stylish import stylish
 
 t = generate_diff2('./tests/fixtures/step6_1.json',
                    './tests/fixtures/step6_2.json')

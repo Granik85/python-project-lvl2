@@ -1,5 +1,6 @@
 import json
 import yaml
+from gendiff.formatters.format_diff import format_diff
 
 result = {}
 
@@ -31,12 +32,13 @@ def generate_diff2(file_path1, file_path2):
     return str_result
 
 
-def generate_diff(file_path1, file_path2):
+def generate_diff(file_path1, file_path2, format_name='stylish'):
     file_type = check_file_type(file_path1)
 
     dict_minus = file_load(open(file_path1), file_type)
     dict_plus = file_load(open(file_path2), file_type)
-    return diff(dict_plus, dict_minus)
+    list_diff = diff(dict_plus, dict_minus)
+    return format_diff(list_diff, format_name)
 
 
 def diff(dict1, dict2):
