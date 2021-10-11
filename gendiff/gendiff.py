@@ -2,6 +2,7 @@
 import argparse
 
 from .parsing import generate_diff
+from .stylish import stylish
 
 
 def main():
@@ -11,7 +12,7 @@ def main():
     parser.add_argument('-f', '--format', help='set format of output')
     args = parser.parse_args()
     print(args)
-    diff = generate_diff(args.first_file, args.second_file)
+    diff = stylish(generate_diff(args.first_file, args.second_file))
     print(diff)
 
 
