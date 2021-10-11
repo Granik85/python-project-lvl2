@@ -1,7 +1,16 @@
 #!/usr/bin/env python
 import argparse
 
-from gendiff.parsing import generate_diff
+from gendiff.parsing import check_file_type, file_load, diff, format_diff
+
+
+def generate_diff(file_path1, file_path2, format_name='stylish'):
+    file_type = check_file_type(file_path1)
+
+    dict_minus = file_load(open(file_path1), file_type)
+    dict_plus = file_load(open(file_path2), file_type)
+    list_diff = diff(dict_plus, dict_minus)
+    return format_diff(list_diff, format_name)
 
 
 def main():
