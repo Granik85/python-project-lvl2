@@ -1,8 +1,8 @@
 def stylish(diff_list):
-    return get_diff_stylish(diff_list)
+    return diff_stylish(diff_list)
 
 
-def get_diff_stylish(diff_list, level=0):
+def diff_stylish(diff_list, level=0):
     result = '{\n'
     indent = '  '
     for i in range(level):
@@ -10,7 +10,7 @@ def get_diff_stylish(diff_list, level=0):
     diff_list.sort(key=lambda x: x['name'])
     for node in diff_list:
         if node['status'] == 'nested':
-            data = get_diff_stylish(node['children'], level + 1)
+            data = diff_stylish(node['children'], level + 1)
             result += f"{indent}  {node['name']}: {data}\n"
         if node['status'] == 'not changed':
             data = format_data(node['data'], indent)
