@@ -20,6 +20,7 @@ def test_yaml():
                    '}'
 
 
+
 def test_json_step6():
     diff = generate_diff('gendiff/tests/fixtures/step6_1.json',
                          'gendiff/tests/fixtures/step6_2.json')
