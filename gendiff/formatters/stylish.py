@@ -1,7 +1,7 @@
 def stylish(diff_list):
     return diff_stylish(diff_list)
 
-
+# flake8: noqa: C901
 def diff_stylish(diff_list, level=0):
     result = '{\n'
     indent = '  '
@@ -12,16 +12,16 @@ def diff_stylish(diff_list, level=0):
         if node['status'] == 'nested':
             data = diff_stylish(node['children'], level + 1)
             result += f"{indent}  {node['name']}: {data}\n"
-        if node['status'] == 'not changed':
+        elif node['status'] == 'not changed':
             data = format_data(node['data'], indent)
             result += f"{indent}  {node['name']}: {data}\n"
-        if node['status'] == 'added':
+        elif node['status'] == 'added':
             data = format_data(node['data'], indent)
             result += f"{indent}+ {node['name']}: {data}\n"
-        if node['status'] == 'deleted':
+        elif node['status'] == 'deleted':
             data = format_data(node['data'], indent)
             result += f"{indent}- {node['name']}: {data}\n"
-        if node['status'] == 'changed':
+        elif node['status'] == 'changed':
             data = format_data(node['data before'], indent)
             result += f"{indent}- {node['name']}: {data}\n"
             data = format_data(node['data after'], indent)
